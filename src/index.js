@@ -10,9 +10,16 @@ const taskRouter = require('./routers/task')
 // console.log(id.id)
 // console.log(id.toHexString())
 
-const app = express()
-const port = process.env.PORT || 3000
+const app = express() 
+const port = process.env.PORT    //|| 3000
+app.use(express.json())
 
+app.use(userRouter)
+app.use(taskRouter)
+
+app.listen(port, () => {
+    console.log('Server is up on port ' +port)
+})
 //middleware function
 // app.use((req, res, next) => {
 //      if(req.method === 'GET'){
@@ -28,31 +35,74 @@ const port = process.env.PORT || 3000
 
 
 
-app.use(express.json())
-
-app.use(userRouter)
-app.use(taskRouter)
-
-app.listen(port, () => {
-    console.log('Server is up on port ' +port)
-})
 
 
+// //module for sending file
+// const multer = require('multer')
+// const upload = multer({
+//     dest: 'images',
+//     limits: {
+//         fileSize: 1000000 
+//     },
+//     fileFilter(req, file, cb){
+         
+//           if(!file.originalname.match(/\.(doc|docx)$/)) {
+//                 return cb(new Error('File must be a Word Document'))
+//           }
+
+//           cb(undefined, true)
+//     }
+// })
+
+// //error middleware
+// // const errorMiddleware = (req, res, next) => {
+// //     throw new Error('From my middleware')
+// // }
+
+
+// app.post('/upload', upload.single('upload'), (req, res) => {
+//     res.send()
+// }, (error, req, res, next) => {
+//     res.status(400).send({ error: error.message})
+// })
+
+
+// const Task = require('./model/tasks')
+// const User = require('./model/users')
+// const main = async () => {
+//     //  const task = await Task.findById('')
+//     //await task.populate('owner').execPopulate()
+//     //    console.log(task)
+//     //console.log(task.owner)
+       
+
+//     // const user = await User.findById('')
+//     //await user.populate('tasks').execPopulate()
+//     // console.log(user.task)
+
+// }
+
+// main()
+
+
+
+
+ 
 //---------------------------bcrypt algo------------------------------------------
 // without middleware ----new req---> run route handler
 // with middleware ----- new req----> do something-----> run route handler
-const jwt = require('jsonwebtoken')
-const myFunction = async () => {
+// const jwt = require('jsonwebtoken')
+// const myFunction = async () => {
           
-         const token = jwt.sign({_id: 'abc123'}, 'thisidfromabhishek', { expiresIn: '7 days'})
+//          const token = jwt.sign({_id: 'abc123'}, 'thisidfromabhishek', { expiresIn: '7 days'})
 
-         console.log(token)
+//          console.log(token)
 
-        // the second part needs to be same 
-        const verify= jwt.verify(token, 'thisidfromabhishek')
-        console.log(verify)
+//         // the second part needs to be same 
+//         const verify= jwt.verify(token, 'thisidfromabhishek')
+//         console.log(verify)
 
-
+//         myFunction()
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9-base 64 encoded header contain info algo.eyJfaWQiOiJhYmMxMjMiLCJpYXQiOjE2MzI2NTc3MjZ9-payload or body json string 64 encode.qyj_HZRrryk5XsfnBdY7SyjSU6Tkelt6ph0A64Qpp1g-signature to verify
 
 
@@ -65,9 +115,9 @@ const myFunction = async () => {
         //  //const isMatch =  await bcrypt.compare('Abhishek@12', hasdedPassword)
         //   const isMatch =  await bcrypt.compare(password, hasdedPassword)
         //   console.log(isMatch)
-}
 
-myFunction()
+
+
 
 //hashing algorithm only workd one way cannot be reversed
 
@@ -324,10 +374,4 @@ myFunction()
 //Get for read and post for create
 
 
-
-
-
 //C:\Users\"Abhishek vats"\mongodb\bin\mongod.exe --dbpath=C:\Users\"Abhishek vats"\mongodb-data
-
-
-//bcrypt-algo
