@@ -1,8 +1,10 @@
-const express = require('express')
-require('./db/mongoose')
-const mongodb = require('mongodb')
-const userRouter = require('./routers/user')
-const taskRouter = require('./routers/task')
+const app = require('./app')
+
+// const express = require('express')
+// require('./db/mongoose')
+// const mongodb = require('mongodb')
+// const userRouter = require('./routers/user')
+// const taskRouter = require('./routers/task')
 
 // const ObjectId = mongodb.ObjectId
 // const id = new ObjectId("614ace75776e990b0cf9dca8")
@@ -10,12 +12,12 @@ const taskRouter = require('./routers/task')
 // console.log(id.id)
 // console.log(id.toHexString())
 
-const app = express() 
+// const app = express() 
 const port = process.env.PORT    //|| 3000
-app.use(express.json())
+// app.use(express.json())
 
-app.use(userRouter)
-app.use(taskRouter)
+// app.use(userRouter)
+// app.use(taskRouter)
 
 app.listen(port, () => {
     console.log('Server is up on port ' +port)
